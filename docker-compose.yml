@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  bash:
+    build: .
+    entrypoint: sh
+    <<: &default
+      image: dannyben/crystal
+      volumes:
+      - ./app:/app
+
+  build:
+    <<: *default
+    command: build --progress --static --release /app/hello.cr
+
+  version:
+    <<: *default
+    command: --version
